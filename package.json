@@ -1,0 +1,43 @@
+{
+  "name": "react-auth0",
+  "version": "1.0.0",
+  "description": "An easy to use react library built on top of authjs for embedded login.",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "rollup": "rollup -c --bundleConfigAsCjs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/metquay/react-auth0.git"
+  },
+  "keywords": [
+    "auth0",
+    "react"
+  ],
+  "author": "https://github.com/Aravind-Metquay",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/metquay/react-auth0/issues"
+  },
+  "homepage": "https://github.com/metquay/react-auth0#readme",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^28.0.1",
+    "@rollup/plugin-node-resolve": "^15.3.0",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^12.1.1",
+    "@types/auth0-js": "^9.21.6",
+    "@types/react": "^19.0.1",
+    "react": "^19.0.0",
+    "rollup-plugin-dts": "^6.1.1",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "tslib": "^2.8.1",
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "auth0-js": "^9.28.0",
+    "rollup": "^4.28.1"
+  }
+}
