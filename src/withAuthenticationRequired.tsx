@@ -8,10 +8,12 @@ interface AuthenticationConfig {
   onRedirecting?: () => void;
 }
 
-export function withAuthenticationRequired<P extends object>(
-  WrappedComponent: React.ComponentType<P>,
+type AnyProps = Record<string, unknown>;
+
+export function withAuthenticationRequired<P extends AnyProps = AnyProps>(
+  Component: React.ComponentType<P>,
   config: AuthenticationConfig | string
-): React.ComponentType<P> {
+) {
   const {
     loginRedirectPath,
     returnTo = true,
@@ -19,17 +21,16 @@ export function withAuthenticationRequired<P extends object>(
     onRedirecting
   } = typeof config === 'string' ? { loginRedirectPath: config } : config;
 
-  return function WithAuthenticationRequired(props: P) {
+  function WithAuthenticationRequired(props: P) {
     const { isAuthenticated, isLoading, error } = useAuth0();
-   
+
     React.useEffect(() => {
       if (!isLoading && !isAuthenticated && !error) {
         if (onRedirecting) {
           onRedirecting();
         }
-
         const currentUrl = window.location.pathname + window.location.search + window.location.hash;
-        
+       
         if (returnTo) {
           const returnPath = encodeURIComponent(currentUrl);
           const redirectUrl = `${loginRedirectPath}?returnTo=${returnPath}`;
@@ -41,15 +42,8 @@ export function withAuthenticationRequired<P extends object>(
     }, [isAuthenticated, isLoading, error]);
 
     if (error) {
-      return (
-        <div className="auth-error">
-          <h3>Authentication Error</h3>
-          <p>{error.message}</p>
-          <button onClick={() => window.location.href = loginRedirectPath}>
-            Return to Login
-          </button>
-        </div>
-      );
+      console.error(error)
+      window.location.href = loginRedirectPath
     }
 
     if (isLoading) {
@@ -64,6 +58,12 @@ export function withAuthenticationRequired<P extends object>(
       return null;
     }
 
-    return <WrappedComponent {...props} />;
-  };
+    return <Component {...props} />;
+  }
+
+  WithAuthenticationRequired.displayName = `WithAuthenticationRequired(${
+    Component.displayName || Component.name || 'Component'
+  })`;
+
+  return WithAuthenticationRequired;
 }

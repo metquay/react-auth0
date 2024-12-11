@@ -1,7 +1,6 @@
-import React, { createContext, useContext } from 'react';
+import React, { createContext, JSX, useContext } from 'react';
 import auth0 from 'auth0-js';
 import { Auth0ClientValue, Auth0Config } from './auth.types';
-
 
 const Auth0Context = createContext<Auth0ClientValue | null>(null);
 
@@ -18,7 +17,10 @@ interface Auth0ProviderProps {
   children: React.ReactNode;
 }
 
-export const Auth0Provider: React.FC<Auth0ProviderProps> = ({ config, children }) => {
+// Using React.ComponentType instead of FC
+export const Auth0Provider = (props: Auth0ProviderProps): JSX.Element => {
+  const { config, children } = props;
+  
   const auth0Client = React.useMemo(() => {
     return new auth0.WebAuth(config);
   }, [config]);
