@@ -2,7 +2,7 @@ import {
     Auth0Provider,
     useAuth0 , 
     withAuthenticationRequired
-} from './react-auth0'
+} from './src'
 
 
 export {

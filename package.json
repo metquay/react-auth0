@@ -1,6 +1,6 @@
 {
   "name": "react-auth0",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "An easy to use react library built on top of authjs for embedded login.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -28,7 +28,6 @@
     "@rollup/plugin-node-resolve": "^15.3.0",
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^12.1.1",
-    "@types/auth0-js": "^9.21.6",
     "@types/react": "^19.0.1",
     "react": "^19.0.0",
     "rollup-plugin-dts": "^6.1.1",
@@ -38,6 +37,7 @@
   },
   "dependencies": {
     "auth0-js": "^9.28.0",
+    "@types/auth0-js": "^9.21.6",
     "rollup": "^4.28.1"
   }
 }
