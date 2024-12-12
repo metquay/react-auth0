@@ -1,6 +1,6 @@
-import React, { createContext, JSX, useContext } from 'react';
+import { createContext, useContext, useMemo, PropsWithChildren, JSX } from 'react';
 import auth0 from 'auth0-js';
-import { Auth0ClientValue, Auth0Config } from './auth.types';
+import type { Auth0ClientValue, Auth0Config } from './auth.types';
 
 const Auth0Context = createContext<Auth0ClientValue | null>(null);
 
@@ -14,18 +14,17 @@ export const useAuth0Client = () => {
 
 interface Auth0ProviderProps {
   config: Auth0Config;
-  children: React.ReactNode;
 }
 
-// Using React.ComponentType instead of FC
-export const Auth0Provider = (props: Auth0ProviderProps): JSX.Element => {
-  const { config, children } = props;
-  
-  const auth0Client = React.useMemo(() => {
+export const Auth0Provider = ({ 
+  config, 
+  children 
+}: PropsWithChildren<Auth0ProviderProps>): JSX.Element => {
+  const auth0Client = useMemo(() => {
     return new auth0.WebAuth(config);
   }, [config]);
 
-  const value = React.useMemo(() => ({
+  const value = useMemo(() => ({
     auth0Client,
     config,
     isInitialized: true

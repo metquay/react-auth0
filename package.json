@@ -1,6 +1,6 @@
 {
   "name": "react-auth0",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "An easy to use react library built on top of authjs for embedded login.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
